@@ -11,11 +11,6 @@ import {
   StackActions,
   DrawerActions,
 } from 'react-navigation';
-import {
-  createTabNavigator as DEPRECATED_createTabNavigator,
-  TabBarTop as DEPRECATED_TabBarTop,
-  TabBarBottom as DEPRECATED_TabBarBottom,
-} from 'react-navigation-deprecated-tab-navigator';
 import PropTypes from 'prop-types';
 import createReducer from './Reducer';
 import * as ActionConst from './ActionConst';
@@ -50,6 +45,7 @@ export const actionMap = {
   [ActionConst.REFRESH]: 'refresh',
   [ActionConst.RESET]: 'reset',
   [ActionConst.PUSH_OR_POP]: 'push',
+  [ActionConst.POP_AND_PUSH]: 'popAndPush',
 };
 
 const reservedKeys = [
@@ -825,6 +821,7 @@ class NavigationStore {
     if (tabs) {
       let createTabNavigator = createMaterialTopTabNavigator;
       if (legacy) {
+        const DEPRECATED_TabBarTop = null;
         createTabNavigator = DEPRECATED_createTabNavigator;
         if (!tabBarComponent) {
           tabBarComponent = tabBarPosition === 'top' ? props => <DEPRECATED_TabBarTop {...props} {...commonProps} /> : props => <DEPRECATED_TabBarBottom {...props} {...commonProps} />;
